@@ -77,8 +77,17 @@ WSGI_APPLICATION = 'simplesocial.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'social',
+        # 'NAME': BASE_DIR / 'db.sqlite3',
+        'USER': os.getenv('DB_USERNAME'),
+        'PASSWORD': os.getenv('DB_PASSWORD'),
+        'HOST': os.getenv('DB_HOST'),
+        'PORT': os.getenv('DB_PORT'),
+        # 'OPTIONS': {
+        #     'service': 'my_service',
+        #     'passfile': '.my_pgpass'
+        # }
     }
 }
 
