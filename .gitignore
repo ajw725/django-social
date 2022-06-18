@@ -1,5 +1,6 @@
 .env
 .env.*
+.envrc
 .idea
 __pycache__
 db.sqlite3
