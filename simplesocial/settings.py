@@ -87,8 +87,8 @@ DATABASES = {
         # 'NAME': BASE_DIR / 'db.sqlite3',
         'USER': os.getenv('DB_USERNAME'),
         'PASSWORD': os.getenv('DB_PASSWORD'),
-        'HOST': os.getenv('DB_HOST'),
-        'PORT': os.getenv('DB_PORT'),
+        'HOST': os.getenv('DB_HOST', 'localhost'),
+        'PORT': int(os.getenv('DB_PORT', '5432')),
         # 'OPTIONS': {
         #     'service': 'my_service',
         #     'passfile': '.my_pgpass'
