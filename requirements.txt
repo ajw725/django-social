@@ -5,6 +5,7 @@ cffi==1.14.6
 Django==4.0.4
 django-bootstrap3==21.2
 django-braces==1.15.0
+django-debug-toolbar==3.4.0
 django-dotenv==1.4.2
 misaka==2.1.1
 psycopg2-binary==2.9.3
