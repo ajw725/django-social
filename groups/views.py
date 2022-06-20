@@ -17,6 +17,11 @@ class CreateGroupView(LoginRequiredMixin, generic.CreateView):
 class SingleGroupView(generic.DetailView):
     model = Group
 
+    def get(self, request, *args, **kwargs):
+        group = Group.objects.get(slug=self.kwargs.get('slug'))
+        user = request.user
+        return super().get(request, *args, **kwargs)
+
 
 class GroupListView(generic.ListView):
     model = Group
@@ -24,17 +29,14 @@ class GroupListView(generic.ListView):
 
 class JoinGroup(LoginRequiredMixin, generic.RedirectView):
     def get_redirect_url(self, *args, **kwargs):
-        return reverse('groups:single', kwargs={'slug': self.kwargs.get('slug')})
-
-    def get(self, request, *args, **kwargs):
         group = get_object_or_404(Group, slug=self.kwargs.get('slug'))
         try:
             GroupMember.objects.create(group=group, user=self.request.user)
         except IntegrityError:
-            messages.warning(request, 'You are already a member of this group.')
+            messages.warning(self.request, 'You are already a member of this group.')
         else:
-            messages.success(request, 'You are now a member of this group.')
-        return super().get(request, *args, **kwargs)
+            messages.success(self.request, 'You are now a member of this group.')
+        return reverse('groups:single', kwargs={'slug': self.kwargs.get('slug')})
 
 
 class LeaveGroup(LoginRequiredMixin, generic.RedirectView):

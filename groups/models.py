@@ -15,7 +15,7 @@ class Group(models.Model):
     slug = models.SlugField(allow_unicode=True, unique=True)
     description = models.TextField(null=True, blank=True, default='')
     description_html = models.TextField(null=True, blank=True, default='', editable=False)
-    members = models.ManyToManyField
+    members = models.ManyToManyField(User, through='GroupMember')
 
     class Meta:
         ordering = ['name']
